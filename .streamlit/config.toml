@@ -1,0 +1,14 @@
+[theme]
+# The app applies its own light/dark palette per session (see frontend/theme.py).
+base = "light"
+primaryColor = "#2563eb"
+
+[server]
+headless = true
+
+[browser]
+gatherUsageStats = false
+
+[client]
+# Hide the "Deploy" button and developer menu entries for end users.
+toolbarMode = "viewer"
