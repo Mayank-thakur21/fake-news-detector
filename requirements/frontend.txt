@@ -1,0 +1,5 @@
+# Runtime dependencies for the Streamlit frontend.
+streamlit==1.66.1
+plotly==7.1.0
+pandas==3.1.0
+requests==2.34.2

@@ -1,0 +1,45 @@
+[project]
+name = "fake-news-detector"
+version = "2.0.0"
+description = "Fake news detection with explainable ML, a FastAPI backend and a Streamlit UI"
+readme = "README.md"
+requires-python = ">=3.12"
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+src = [".", "frontend"]
+extend-exclude = ["notebooks"]
+
+[tool.ruff.lint]
+select = [
+  "E", "W",   # pycodestyle
+  "F",        # pyflakes
+  "I",        # isort
+  "B",        # bugbear
+  "UP",       # pyupgrade
+  "SIM",      # simplify
+  "C4",       # comprehensions
+  "RUF",      # ruff-specific
+]
+ignore = [
+  "B008",     # FastAPI's Depends() in defaults is idiomatic
+  "RUF001",   # emoji/unicode in UI strings is intentional
+]
+
+[tool.ruff.lint.isort]
+known-first-party = ["backend", "ml", "api_client", "components", "history", "theme"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = [".", "frontend"]
+addopts = "-ra --strict-markers"
+filterwarnings = ["error::ResourceWarning"]
+
+[tool.coverage.run]
+source = ["backend", "ml", "frontend"]
+omit = ["frontend/streamlit_app.py", "frontend/components.py"]
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = true

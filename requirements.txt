@@ -1,0 +1,3 @@
+# Everything needed to run the full stack locally (backend + frontend + training).
+-r requirements/backend.txt
+-r requirements/frontend.txt
