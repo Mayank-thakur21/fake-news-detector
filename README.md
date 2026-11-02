@@ -1,100 +1,128 @@
-# AI-Powered Fake News Detection System
+# 📰 Fake News Detection System v2.0
 
-A machine learning web application that determines whether a news article is **Fake** or **Real** with 99.65% accuracy.
+![CI](https://github.com/Mayank-thakur21/fake-news-detector/actions/workflows/ci.yml/badge.svg)
+![Python](https://img.shields.io/badge/python-3.11-blue)
+![FastAPI](https://img.shields.io/badge/FastAPI-0.111-green)
+![Streamlit](https://img.shields.io/badge/Streamlit-1.35-red)
+![License](https://img.shields.io/badge/license-MIT-yellow)
 
-## Features
+An advanced ML-powered system to detect fake news articles using **Random Forest**, **Logistic Regression**, and **SVM** classifiers with TF-IDF vectorization.
 
-- Real-time news article analysis
-- Confidence score for each prediction
-- Prediction history (session-based)
-- Clean, modern Streamlit UI
-- REST API backend (FastAPI)
-- Handles empty/invalid input gracefully
+---
 
-## Tech Stack
+## ✨ Features
 
-| Layer | Technology |
-|-------|-----------|
-| Frontend | Streamlit |
-| Backend | FastAPI, Uvicorn |
-| ML Model | Random Forest (scikit-learn) |
-| Text Processing | TF-IDF Vectorizer |
-| Data | pandas, numpy |
+| Feature | Description |
+|--------|-------------|
+| 🔍 Single Analysis | Paste any article and get instant prediction |
+| 🔗 URL Scraping | Enter a URL — we fetch and analyze it |
+| 📦 Batch Analysis | Analyze up to 20 articles at once |
+| ⚖️ Model Comparison | Compare results across 3 ML models |
+| 📊 Feature Breakdown | See which words drove the prediction |
+| 📜 History Export | Download prediction history as CSV |
+| 📈 Stats Dashboard | Track total predictions and model accuracy |
+| 🐳 Docker Support | One-command deploy with docker-compose |
 
-## Project Structure
+---
 
-```
-fake-news-detection/
-├── backend/
-│   ├── app.py                 # FastAPI server
-│   ├── predictor.py           # Model loading & prediction
-│   ├── fake_news_model.pkl    # Trained Random Forest model
-│   ├── tfidf_vectorizer.pkl   # TF-IDF vectorizer
-│   └── requirements.txt
-├── frontend/
-│   └── streamlit_app.py       # Streamlit UI
-├── requirements.txt           # All dependencies
-├── demo_news.md               # Sample articles for testing
-├── presentation.md            # PPT content
-└── README.md
-```
+## 🚀 Quick Start
 
-## Installation
-
+### Option 1: Docker (Recommended)
 ```bash
-pip install -r requirements.txt
+git clone https://github.com/Mayank-thakur21/fake-news-detector
+cd fake-news-detector
+cp .env.example .env
+docker-compose up --build
 ```
+- Frontend: http://localhost:8501
+- Backend API: http://localhost:8000/docs
 
-## Running the App
-
-**Terminal 1 – Backend:**
+### Option 2: Manual
 ```bash
+# Backend
 cd backend
-uvicorn app:app --host 127.0.0.1 --port 8000 --reload
+pip install -r requirements.txt
+uvicorn app:app --reload
+
+# Frontend (new terminal)
+cd frontend
+pip install -r requirements.txt
+streamlit run streamlit_app.py
 ```
 
-**Terminal 2 – Frontend:**
+---
+
+## 🛠️ Tech Stack
+
+- **Backend:** FastAPI, scikit-learn, joblib, BeautifulSoup4
+- **Frontend:** Streamlit, pandas
+- **Models:** Random Forest, Logistic Regression, SVM
+- **Vectorizer:** TF-IDF
+- **CI/CD:** GitHub Actions
+
+---
+
+## 📡 API Reference
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/health` | Health check |
+| POST | `/predict` | Single article prediction |
+| POST | `/predict/batch` | Batch prediction (max 20) |
+| POST | `/predict/url` | Predict from URL |
+| GET | `/stats` | Usage statistics |
+| GET | `/models` | List available models |
+
+### Example
 ```bash
-streamlit run frontend/streamlit_app.py --server.port 8501
+curl -X POST http://localhost:8000/predict \
+  -H "Content-Type: application/json" \
+  -d '{"news": "Your article text here", "model": "random_forest"}'
 ```
 
-Open **http://localhost:8501** in your browser.
-
-## API Documentation
-
-### `GET /`
-Returns API health status.
-
-### `POST /predict`
-Analyze a news article.
-
-**Request:**
-```json
-{ "news": "Full article text here..." }
-```
-
-**Response:**
+### Response
 ```json
 {
-  "prediction": "Fake News",
-  "confidence": 96.50
+  "prediction": "Real News",
+  "confidence": 94.2,
+  "model_used": "random_forest",
+  "word_count": 142,
+  "top_features": {"climate": 0.42, "research": 0.38}
 }
 ```
 
-## Model Performance
+---
 
-- **Algorithm:** Random Forest Classifier
-- **Accuracy:** 99.65%
-- **Features:** TF-IDF (5,000 max features)
-- **Estimators:** 100
+## 🧪 Running Tests
+```bash
+cd backend
+pip install pytest httpx
+pytest tests/ -v
+```
 
-## Dataset
+---
 
-~44,000 labeled news articles from Kaggle (True.csv + Fake.csv), split into real and fake categories.
+## 🏗️ Project Structure
+```
+fake-news-detector/
+├── backend/
+│   ├── app.py              # FastAPI app
+│   ├── predictor.py        # ML inference engine
+│   ├── requirements.txt
+│   ├── Dockerfile
+│   ├── models/             # Trained model files (.pkl)
+│   └── tests/
+│       └── test_api.py
+├── frontend/
+│   ├── streamlit_app.py    # Streamlit UI
+│   ├── requirements.txt
+│   └── Dockerfile
+├── .env.example
+├── docker-compose.yml
+└── README.md
+```
 
-## Future Improvements
+---
 
-- Deep learning models (LSTM, BERT)
-- Multi-language support
-- Source credibility scoring
-- Browser extension
+## 📄 License
+MIT © Mayank Thakur
