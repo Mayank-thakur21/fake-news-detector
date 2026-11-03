@@ -7,6 +7,7 @@
 ![scikit-learn](https://img.shields.io/badge/scikit--learn-1.9-F7931E?logo=scikitlearn&logoColor=white)
 ![Docker](https://img.shields.io/badge/docker-compose-2496ED?logo=docker&logoColor=white)
 ![Code style: ruff](https://img.shields.io/badge/code%20style-ruff-261230?logo=ruff)
+[![License: MIT](https://img.shields.io/badge/license-MIT-yellow)](LICENSE)
 
 Classify news articles as **Fake** or **Real** with three machine-learning models, see
 **why** each prediction was made, analyse **URLs** and **whole batches**, compare models
@@ -33,6 +34,7 @@ Streamlit UI with light and dark themes.
 - [Project structure](#-project-structure)
 - [Security notes](#-security-notes)
 - [Roadmap](#%EF%B8%8F-roadmap)
+- [License](#-license)
 
 ---
 
@@ -511,3 +513,9 @@ Sample articles for manual testing are in [`docs/demo_news.md`](docs/demo_news.m
 - Multi-language support
 - Browser extension calling `/predict`
 - Redis-backed rate limiting and Postgres history for multi-instance deployments
+
+---
+
+## 📄 License
+
+[MIT](LICENSE) © 2026 Mayank Thakur
